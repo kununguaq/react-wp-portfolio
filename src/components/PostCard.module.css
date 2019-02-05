@@ -1,10 +1,35 @@
 .wrapper {
-	background-color: red;
+	background-color: black;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
 }
 .image {
 	width: 100%;
 	display: block;
-	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: bottom;
+}
+.back {
+	background-color: white;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.content {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	text-align: center;
+	padding: 10px;
+	padding-bottom: 12px;
+	pointer-events: none;
+}
+.header,
+.meta {
+	margin: 2px;
 }

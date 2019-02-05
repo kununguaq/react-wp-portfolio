@@ -3,13 +3,15 @@ import Masonry from 'react-masonry-css';
 import styles from './Portfolio.module.css';
 import PostCard from './PostCard';
 
+const breakpointColumnsObj = {
+	default: 4,
+	1100: 3,
+	700: 2,
+	500: 1
+};
+
 const Portfolio = props => {
-	const breakpointColumnsObj = {
-		default: 4,
-		1100: 3,
-		700: 2,
-		500: 1
-	};
+	
 	const postCards = props.posts.length ? (
 		props.posts.map(post => <PostCard post={post} key={post.id} />)
 	) : (
