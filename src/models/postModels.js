@@ -18,41 +18,47 @@ export class PostModel {
 
 export class FeaturedMediaModel {
 	constructor(data) {
-		this.full = data.media_details.file
-			? data.media_details.sizes.full.source_url
-			: data.source_url;
-		this.large = data.media_details.file
-			? data.media_details.sizes.large.source_url
-			: data.source_url;
-		this.medium = data.media_details.file
-			? data.media_details.sizes.medium.source_url
-			: data.source_url;
-		this.medium_large = data.media_details.file
-			? data.media_details.sizes.medium_large.source_url
-			: data.source_url;
-		this.post_thumbnail = data.media_details.file
-			? data.media_details.sizes['post-thumbnail'].source_url
-			: data.source_url;
-		this.thumbnail = data.media_details.file
-			? data.media_details.sizes.thumbnail.source_url
-			: data.source_url;
+		if (data.media_details.file) {
+			this.sizes = {
+				width: data.media_details.sizes.full.width,
+				height: data.media_details.sizes.full.height
+			};
+			this.full = data.media_details.sizes.full.source_url;
+			this.large = data.media_details.sizes.large.source_url;
+			this.medium = data.media_details.sizes.medium.source_url;
+			this.medium_large = data.media_details.sizes.medium_large.source_url;
+			this.post_thumbnail =
+				data.media_details.sizes['post-thumbnail'].source_url;
+			this.thumbnail = data.media_details.sizes.thumbnail.source_url;
+		} else {
+			this.full = data.source_url;
+			this.large = data.source_url;
+			this.medium = data.source_url;
+			this.medium_large = data.source_url;
+			this.post_thumbnail = data.source_url;
+			this.thumbnail = data.source_url;
+			this.sizes = {
+				width: 1,
+				height: 1
+			};
+		}
 	}
 }
 
 export class CategoryModel {
-	constructor(data){
+	constructor(data) {
 		this.name = data.name;
 		this.description = data.description;
 		this.tags = [];
 	}
 
-	addTags(data){
+	addTags(data) {
 		this.tags = data.map(tag => new TagModel(tag));
 	}
 }
 
 export class TagModel {
-	constructor(data){
+	constructor(data) {
 		this.name = data;
 		this.enabled = true;
 	}
