@@ -3,6 +3,7 @@ import { Markup } from 'interweave';
 import posed from 'react-pose';
 import styles from './PostCard.module.css';
 
+// Back poses
 const Back = posed.div({
 	idle: {
 		opacity: 0
@@ -11,6 +12,8 @@ const Back = posed.div({
 		opacity: 1
 	}
 });
+
+// Content poses
 const Content = posed.div({
 	idle: {
 		scale: 1,
@@ -25,25 +28,28 @@ const Content = posed.div({
 		scale: 0.8
 	}
 });
+
+// Date format
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 class PostCard extends Component {
 	constructor(props) {
 		super(props);
+		// Store pose in state
 		this.state = {
 			pose: 'idle'
 		};
+		// Determine image height
 		this.w = this.props.post.featuredMedia.sizes.width;
 		this.h = this.props.post.featuredMedia.sizes.height;
-		this.height = this.h > this.w ? '200%' : '100%';
+		this.height = this.h > this.w ? '160%' : '80%';
 		this.image = {
 			backgroundImage: `url(${this.props.post.featuredMedia.medium})`,
 			paddingBottom: this.height
 		};
 	}
-	
 
-	handlePress = e => {		
+	handlePress = e => {
 		this.setState({ pose: 'press' });
 		setTimeout(() => {
 			this.setState({ pose: 'idle' });
@@ -51,7 +57,6 @@ class PostCard extends Component {
 	};
 
 	render() {
-
 		return (
 			<div
 				className={styles.wrapper}

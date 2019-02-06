@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Sticky from 'react-sticky-el';
+import styles from './App.module.css';
 import { PostModel, CategoryModel } from './models/postModels';
 import Portfolio from './components/Portfolio';
+import Splash from './components/Splash';
 
 class App extends Component {
-
 	state = {
 		posts: [],
 		categories: []
 	};
-
 
 	async componentDidMount() {
 		// FETCH CATEGORIES
@@ -58,7 +59,19 @@ class App extends Component {
 	render() {
 		const posts = this.state.posts;
 		return (
-			<Portfolio posts={posts}/>
+			<div>
+				<Splash />
+				<div className={styles.block}>
+					<Sticky
+						className={styles.sticky}
+						boundaryElement=".block"
+						hideOnBoundaryHit={false}
+					>
+						<h1>Scroll pane</h1>
+					</Sticky>
+					<Portfolio posts={posts} />
+				</div>
+			</div>
 		);
 	}
 }
