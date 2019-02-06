@@ -1,0 +1,5 @@
+.splash{
+    display: flex;
+    background-color:red;
+    z-index:3;
+}
